@@ -59,3 +59,13 @@ public key:
 paste the public key into the deploy keys public key form. 
 
 ~$ git clone:git@github.com:MechanicalNun/Server-app.git
+
+
+Setting up google maps api v3:
+http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html
+https://developers.google.com/maps/documentation/javascript/examples/maptype-styled-simple
+
+
+
+
+
