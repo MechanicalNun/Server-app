@@ -2,18 +2,18 @@ var hoodPolygons = {"Bayview Park":[["-122.3910323868129","37.70819686392956"],[
 
 var hoods = {};
 for (var neighborhood in hoodPolygons) {
-	var polys = hoodPolygons[neighborhood];
-	var paths = [];
-	for (var i = 0; i < polys.length; i++) {
-		paths.push(new google.maps.LatLng(polys[i][1], polys[i][0]));
-	}
+    var polys = hoodPolygons[neighborhood];
+    var paths = [];
+    for (var i = 0; i < polys.length; i++) {
+        paths.push(new google.maps.LatLng(polys[i][1], polys[i][0]));
+    }
 
-	hoods[neighborhood] = {
-		paths: paths,
-		"strokeColor": '#FF0000',
-	    "strokeOpacity": 0,
-	    "strokeWeight": 1,
-	    "fillColor": '#00FF00',
-	    "fillOpacity": 0
-	}
+    hoods[neighborhood] = {
+        paths: paths,
+        "strokeColor": '#FF0000',
+        "strokeOpacity": 0,
+        "strokeWeight": 1,
+        "fillColor": '#00FF00',
+        "fillOpacity": 0
+    }
 }
