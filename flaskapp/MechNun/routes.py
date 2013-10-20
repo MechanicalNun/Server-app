@@ -38,7 +38,7 @@ def map():
 
 @app.route('/sound')  
 def sound():
-    static = 'static'
+    static = '/static'
     song =  '/'.join([static,'Jennifer.mp3'])
     # TODO initialize the mixer at startup
     pygame.mixer.init()
