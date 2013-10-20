@@ -38,20 +38,13 @@ def map():
 
 @app.route('/sound')  
 def sound():
-    # song =  '/Users/Oren/Music/Kalya Scintilla/Kalya Scintilla Bluetech - 667 (Kalya Scintilla Remix).mp3'
-
-    static = '/home/pi/Server-app/flaskapp/MechNun/static'
-    song =  '/'.join([static,'Animals.m4a'])
+    static = 'static'
+    song =  '/'.join([static,'Jennifer.mp3'])
+    # TODO initialize the mixer at startup
     pygame.mixer.init()
     pygame.mixer.music.load(song)
     pygame.mixer.music.play()
-    #player = subprocess.Popen(['mplayer', song, '-ss', "30"], stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)  
-    #time.sleep(4)
-    #player.stdin.write("q")
-    # out = ', '.join(os.listdir(str(os.getcwd())))
-    # out = ', '.join(os.listdir(str("/Users/Oren/Coding/MechanicalNun/Server-app/flaskapp/MechNun/static")))
-    out = song
-    return out
+    return 'Playing %s'
     
 
 
