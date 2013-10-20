@@ -13,9 +13,10 @@
 
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type=text/javascript src="{{url_for('static', filename='sf_neighbourhoods.js') }}"></script>
     
-    <script>
+    <script type"text/javascript">
 // This example creates a simple polygon representing the Bermuda Triangle.
 
 var MY_MAPTYPE_ID = 'custom_style';
@@ -74,7 +75,7 @@ function initialize() {
 
   var mapOptions = {
     zoom: 13,
-    center: new google.maps.LatLng(37.765, -122.433523),
+    center: new google.maps.LatLng(37.747, -122.433523),
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
     },
@@ -88,88 +89,31 @@ function initialize() {
     name: 'Custom Style'
   };
 
-
   var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
   map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 
-var hoods = {
-  "Noe Valley" : {
-    paths: apparelCityCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0,
-    strokeWeight: 2,
-    fillColor: '#00FF00',
-    fillOpacity: 0.3
-  },
-  "SOMA" : {
-    paths: bayviewParkCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0,
-    strokeWeight: 2,
-    fillColor: '#00FF00',
-    fillOpacity: 0.3
-  }
-}
-alert(123);
+var overrides = {
+  "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'},
+  "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'}
+};
+
+var overrides = {{ data }}
 
 for ( var key in hoods) {
-  new google.maps.Polygon(hoods[key]).setMap(map);;
+  var hood = hoods[key]
+    , hoodOverrides = overrides[key] || hoods[key]
+    , polygon = {
+      paths: hood.paths,
+      strokeColor: hood.strokeColor,
+      strokeWeight: hood.strokeWeight,
+      fillColor: hoodOverrides.fillColor,
+      fillOpacity: hoodOverrides.fillOpacity,
+    }
+  if (hood) {
+    new google.maps.Polygon(polygon).setMap(map);
+  };
 }
-/*
 
-  // Construct the polygon.
-parnassusHeights = new google.maps.Polygon({
-    paths: parnassusHeightsCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.35
-  });
-
-  // Construct the polygon.
-apparelCity = new google.maps.Polygon({
-    paths: apparelCityCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0,
-    strokeWeight: 2,
-    fillColor: '#00FF00',
-    fillOpa city: 0.3
-  });
-
-bayviewPark = new google.maps.Polygon({
-    paths: bayviewParkCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0,
-    strokeWeight: 2,
-    fillColor: '#00FF00',
-    fillOpacity: 1
-  });
-
-bernalHeights = new google.maps.Polygon({
-    paths: bernalHeightsCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.9
-  });
-
-missionTerrace = new google.maps.Polygon({
-    paths: missionTerraceCoords,
-    strokeColor: '#FF0000',
-    strokeOpacity: 0,
-    strokeWeight: 2,
-    fillColor: '#FF0000',
-    fillOpacity: 0.5
-  });
-
-  parnassusHeights.setMap(map);
-  apparelCity.setMap(map);
-  bayviewPark.setMap(map);
-  bernalHeights.setMap(map);
-  missionTerrace.setMap(map);
-  */
 }
 
 google.maps.event.addDomListener(window, 'load', initialize);

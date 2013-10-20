@@ -213,4 +213,50 @@ var missionTerraceCoords = [
 	new google.maps.LatLng('37.7273241399128', '-122.432804530551'),
 	new google.maps.LatLng('37.73192808365398', '-122.4281366832968')]
 	
-	 
+var hoods = {
+  "Apparel City" : {
+    "paths": apparelCityCoords,
+    "strokeColor": '#FF0000',
+    "strokeOpacity": 0,
+    "strokeWeight": 1,
+    "fillColor": '#00FF00',
+    "fillOpacity": 0
+  },
+  "Bayview Park" : {
+    paths: bayviewParkCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0,
+    strokeWeight: 1,
+    fillColor: '#00FF00',
+    fillOpacity: 0
+  },
+  "Parnassus Heights" : {
+    paths: parnassusHeightsCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0,
+    strokeWeight: 1,
+    fillColor: '#00FF00',
+    fillOpacity: 0
+  },
+	"Bernal Heights" : {
+    paths: bernalHeightsCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0,
+    strokeWeight: 1,
+    fillColor: '#FF0000',
+    fillOpacity: 0
+  },
+	"Mission Terrace": {
+    paths: missionTerraceCoords,
+    strokeColor: '#FF0000',
+    strokeOpacity: 0,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0
+  }
+}	 
+
+
+
+
+

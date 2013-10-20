@@ -1,0 +1,164 @@
+<html>
+<head>
+	<title>D3 Test</title>
+</head>
+<body>
+	<h2>HERE IS WHERE THE SVG GOES</h2>
+	<div id="svgdump">
+		<!-- Loading -->
+	</div>
+	<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="http://api.jquery.com/wp-includes/js/comment-reply.min.js?ver=3.5.1"></script>
+	<script>
+	// data structure for aligning texts:
+		var data = 
+		{
+			'bg':"white", 
+			'line_position': [[0, 6], [1, 5], [0, 5]],
+			'diff_verbs':[
+				[{'name':"nice"}, {}, {'name':"verb0b"}],
+				[{'name':"verb1"}, {'name':"verb1a"}],
+				[{'name':"verb2"}, {'name':"verb2a"}, {'name':"verb2b"}],
+				[{'name':"verb3"}, {'name':"verb3a"}],
+				[{'name':"verb4"}, {'name':"verb4b"}, {'name':"verb4c"}],
+				[{'name':"verb5"}, {'name':"verb5b"}, {'name':"verb5c"}],
+				[{'name':"verb6"}, {'name':"verb6c"}]
+			],
+			'same_verbs':[
+				[{'name':"add"}, {'name':"verb0b"}],
+				[{'name':"chill"}, {'name':"verb1a"}],
+				[{'name':"spin"}, {'name':"verb2a"}],
+				[{'name':"add"}, {'name':"verb3a"}],
+				[{'name':"mix"}, {'name':"verb4b"}],
+				[{'name':"incubate"}, {'name':"verb5b"}],
+				[{'name':"freeze"}, {'name':"verb6c"}]
+			]  
+		};	
+
+		var svgroupContainer = d3.select("#svgdump").append("svg").attr("width", "2000px").attr("height", "2000px");
+		var nodeXMargin = 100;
+		var nodeYMargin = 20;
+		var nodeHeight = 30;
+		var nodeWidth = 100;
+		var nodeRow = 5;
+		var strokeWidth = 5;
+		// var columnCount = data.verbs.length;
+
+		function build_diff_verb_box(element, index, array) {
+
+			if ( !element.name ) {	// IF IT HAS NO NAME SKIP IT
+				return;
+			}
+
+			nodeXPos = (nodeXMargin * index) + (index * (nodeWidth + nodeXMargin)) + strokeWidth;
+
+			var groupContainer = svgroupContainer.append("g")
+							.attr('id',element.name)
+							.attr('class',"node");
+
+			groupContainer.append("title").text(function(d) { return element.name; }); 
+
+			var anchorContainer = groupContainer.append("a")
+							.attr('xlink:href', "http://www.google.com")
+							.attr('target',"_top");
+
+			var rectContainer = anchorContainer.append("rect")
+							.attr("width", nodeWidth)
+							.attr("height", nodeHeight)
+							.attr("y", nodeYPos)
+							.attr("x", nodeXPos)
+							.attr("rx", 5)
+							.attr("style", "fill:white;stroke:pink;stroke-width:" + strokeWidth);
+
+			var rectText = anchorContainer.append("text")
+							.attr("text-anchor", "middle")
+							.attr("font-family", "Times,serif")
+							.attr("y", nodeYPos + (nodeHeight/2 + 5))
+							.attr("x", nodeXPos + (nodeWidth/2))
+							.attr("font-size","14.00")
+							.text(function(d) { return element.name; }); 
+			
+		};
+
+		function build_same_verb_box(element, index, array) {
+
+			if ( !element.name ) {	// IF IT HAS NO NAME SKIP IT
+				return;
+			}
+
+			nodeXPos = (nodeXMargin * index) + (index * (nodeWidth + nodeXMargin)) + strokeWidth;
+
+			var groupContainer = svgroupContainer.append("g")
+							.attr('id',element.name)
+							.attr('class',"node");
+
+			groupContainer.append("title").text(function(d) { return element.name; }); 
+
+			var anchorContainer = groupContainer.append("a")
+							.attr('xlink:href', "http://www.google.com")
+							.attr('target',"_top");
+
+			var rectContainer = anchorContainer.append("rect")
+							.attr("width", nodeWidth)
+							.attr("height", nodeHeight)
+							.attr("y", nodeYPos)
+							.attr("x", nodeXPos)
+							.attr("rx", 5)
+							.attr("style", "fill:white;stroke:pink;stroke-width:" + strokeWidth);
+
+			var rectText = anchorContainer.append("text")
+							.attr("text-anchor", "middle")
+							.attr("font-family", "Times,serif")
+							.attr("y", nodeYPos + (nodeHeight/2 + 5))
+							.attr("x", nodeXPos + (nodeWidth/2))
+							.attr("font-size","14.00")
+							.text(function(d) { return element.name; }); 
+			
+		};
+
+		function build_diff_row(element, index, array) {
+			nodeYPos = (nodeYMargin * index) + (index * (nodeHeight + nodeYMargin)) + strokeWidth;
+			if (element.length ===2 ){
+				console.log('length is 2')
+				console.log(index)
+			};
+			element.forEach(build_diff_verb_box);
+		};
+
+		function draw_lines(element, index){	
+			// var colX = (nodeYPos * 2) + (nodeWidth/2) - (strokeWidth/2);
+			var nodeXPos = (nodeXMargin * index) + (index * (nodeWidth + nodeXMargin)) + strokeWidth + (nodeWidth/2);
+
+			var start = (nodeYMargin * element[0]) + (element[0] * (nodeHeight + nodeYMargin)) + strokeWidth;
+			var finish = (nodeYMargin * element[1]) + (element[1] * (nodeHeight + nodeYMargin)) + strokeWidth;
+			// console.log('start', start)
+			// console.log('end', finish)
+			
+			var lineDrop = svgroupContainer.append("line")
+								.attr('x1', nodeXPos)
+								// .attr('y1', nodeYMargin)
+								.attr('y1', start)
+								.attr('x2', nodeXPos)
+								// .attr('y2', colLineLength)
+								.attr('y2', finish)
+								.attr('stroke', "blue")
+								.attr('stroke-width', 9);
+		};
+
+		function build_column(element, index, array) {
+			nodeYPos = (nodeYMargin * index) + (index * (nodeHeight + nodeYMargin)) + strokeWidth;
+			draw_lines(element, index);
+		};
+
+		// function get_meta_data(element, index, array){
+		// 	// var rows = data.verbs.length
+		// 	var columns = 
+
+		// };
+
+		data.line_position.forEach(build_column)
+		data.diff_verbs.forEach(build_diff_row);
+
+	</script>
+</body>
+</html>
