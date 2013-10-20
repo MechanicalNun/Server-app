@@ -40,7 +40,7 @@ def map():
 def sound():
     # song =  '/Users/Oren/Music/Kalya Scintilla/Kalya Scintilla Bluetech - 667 (Kalya Scintilla Remix).mp3'
 
-    static = '/Users/Oren/Coding/MechanicalNun/Server-app/flaskapp/MechNun/static'
+    static = '/home/pi/Server-app/flaskapp/MechNun'
     song =  '/'.join([static,'Animals.m4a'])
     pygame.mixer.init()
     pygame.mixer.music.load(song)
