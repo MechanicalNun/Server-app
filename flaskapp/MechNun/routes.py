@@ -1,4 +1,5 @@
 from flask import Flask, render_template, url_for, jsonify, request
+import pygame
 import time
 import subprocess 
 import os
@@ -41,9 +42,12 @@ def sound():
 
     static = '/Users/Oren/Coding/MechanicalNun/Server-app/flaskapp/MechNun/static'
     song =  '/'.join([static,'Animals.m4a'])
-    player = subprocess.Popen(['mplayer', song, '-ss', "30"], stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)  
-    time.sleep(4)
-    player.stdin.write("q")
+    pygame.mixer.init()
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play()
+    #player = subprocess.Popen(['mplayer', song, '-ss', "30"], stdin = subprocess.PIPE, stdout = subprocess.PIPE, stderr = subprocess.PIPE)  
+    #time.sleep(4)
+    #player.stdin.write("q")
     # out = ', '.join(os.listdir(str(os.getcwd())))
     # out = ', '.join(os.listdir(str("/Users/Oren/Coding/MechanicalNun/Server-app/flaskapp/MechNun/static")))
     out = song
