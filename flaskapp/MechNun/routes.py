@@ -6,7 +6,6 @@ import os
 
 app = Flask(__name__)      
 static = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
-mixer = pygame.mixer.init()
 
 @app.route('/')
 def test1():
@@ -42,6 +41,7 @@ def map():
 def sound():
     song =  '/'.join([static,'Jennifer.mp3'])
     # TODO: initialize the mixer at startup as a class object
+    mixer = pygame.mixer.init()
     mixer.music.load(song)
     mixer.music.play()
     return 'Playing %s' % song
