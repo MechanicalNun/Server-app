@@ -4,9 +4,9 @@ import time
 import subprocess 
 import os
 from arduino_nun import *
-import serial as s
+import serial
 
-s = Serial('/dev/ttyUSB0', 115200, timeout=0)
+s = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
 
 app = Flask(__name__)      
 static = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
