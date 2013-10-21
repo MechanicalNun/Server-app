@@ -5,7 +5,9 @@ import subprocess
 import os
 
 app = Flask(__name__)      
- 
+static = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+mixer = pygame.mixer.init()
+
 @app.route('/')
 def test1():
   return render_template('merge_style_hoods.html')
@@ -38,14 +40,11 @@ def map():
 
 @app.route('/sound')  
 def sound():
-    static = os.path.join(os.path.dirname(os.path.abspath(__file__)), 
-                          'static')
     song =  '/'.join([static,'Jennifer.mp3'])
-    # TODO initialize the mixer at startup
-    pygame.mixer.init()
-    pygame.mixer.music.load(song)
-    pygame.mixer.music.play()
-    return 'Playing %s'
+    # TODO: initialize the mixer at startup as a class object
+    mixer.music.load(song)
+    mixer.music.play()
+    return 'Playing %s' % song
     
 
 
