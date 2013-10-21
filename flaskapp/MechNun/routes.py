@@ -41,9 +41,9 @@ def map():
 def sound():
     song =  '/'.join([static,'Jennifer.mp3'])
     # TODO: initialize the mixer at startup as a class object
-    mixer = pygame.mixer.init()
-    mixer.music.load(song)
-    mixer.music.play()
+    pygame.mixer.init()
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play()
     return 'Playing %s' % song
     
 
