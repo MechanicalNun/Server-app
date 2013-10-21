@@ -55,6 +55,10 @@ def rainbow(l=30):
     s.write(command_leds(leds))
     return ''    
 
+@app.route('/color/<int:c>')
+def color(c):
+    s.write(chr(c))
+    return ''
 
 @app.route('/index')
 def index():
