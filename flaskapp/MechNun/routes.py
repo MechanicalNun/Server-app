@@ -1,9 +1,10 @@
 from flask import Flask, render_template, url_for, jsonify, request
-import pygame
+# import pygame
 import time
 import subprocess 
 import os
-# from arduino_nun import *
+from arduino_nun import *
+import serial as s
 
 app = Flask(__name__)      
 static = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
@@ -42,28 +43,27 @@ def map():
 def sound():
     song =  '/'.join([static,'Jennifer.mp3'])
     # TODO: initialize the mixer at startup as a class object
-    pygame.mixer.init()
-    pygame.mixer.music.load(song)
-    pygame.mixer.music.play()
-    return 'Playing %s' % song
+    # pygame.mixer.init()
+    # pygame.mixer.music.load(song)
+    # pygame.mixer.music.play()
+    # return 'Playing %s' % song
     
 
-# @app.route('/rainbow/') 
-# @app.route('/rainbow/<int:l>')
-# def rainbow(l=30):
-#     leds = [hsv2rgb((360.0 / float(l)) * float(i), 1, 0.5) for i in xrange(l)]
-#     s.write(command_leds(leds))
-#     return ''    
+@app.route('/rainbow/') 
+@app.route('/rainbow/<int:l>')
+def rainbow(l=30):
+    leds = [hsv2rgb((360.0 / float(l)) * float(i), 1, 0.5) for i in xrange(l)]
+    s.write(command_leds(leds))
+    return ''    
 
-# @app.route('/color/<int:c>')
-# def color(c):
-#     s.write(chr(c))
-#     return ''
+@app.route('/color/<int:c>')
+def color(c):
+    s.write(chr(c))
+    return ''
 
 @app.route('/index')
 def index():
     return render_template('index.html')    
 
-
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80, debug=True)
