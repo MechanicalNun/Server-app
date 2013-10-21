@@ -3,6 +3,7 @@ import pygame
 import time
 import subprocess 
 import os
+from arduino_nun import *
 
 app = Flask(__name__)      
 static = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
@@ -46,6 +47,13 @@ def sound():
     pygame.mixer.music.play()
     return 'Playing %s' % song
     
+
+@app.route('/rainbow/') 
+@app.route('/rainbow/<int:l>')
+def rainbow(l=30):
+    leds = [hsv2rgb((360.0 / float(l)) * float(i), 1, 0.5) for i in xrange(l)]
+    s.write(command_leds(leds))
+    return ''    
 
 
 @app.route('/index')
