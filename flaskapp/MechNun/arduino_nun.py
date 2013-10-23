@@ -1,4 +1,4 @@
-from serial import Serial
+# from serial import Serial
 from struct import pack
 import json
 
@@ -28,7 +28,7 @@ def command_clear():
     ret = ESCAPE + START + COMMAND_CLEAR
     return ret
 
-s = Serial('/dev/ttyUSB0', 115200, timeout=0)
+# s = Serial('/dev/ttyUSB0', 115200, timeout=0)
 
 #---------------------------------------------------------------------------------------
 # color stuff

@@ -26,7 +26,7 @@ function initialize() {
   var featureOpts = [
     {
       stylers: [
-        { hue: '#8900dg' },
+        { hue: '#890000' },
         { visibility: 'simplified' },
         { gamma: 0.5 },
         { weight: 0.5 }
@@ -92,12 +92,8 @@ function initialize() {
   var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
   map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
 
-var overrides = {
-  "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'},
-  "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'},
-  "Mission Dolores": {"fillOpacity": 0.5, "fillColor": 'black'}
 
-};
+var overrides = {{ data|tojson }}
 
 for ( var key in hoods) {
   var hood = hoods[key]

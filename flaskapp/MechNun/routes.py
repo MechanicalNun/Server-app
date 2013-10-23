@@ -4,9 +4,9 @@ import time
 import subprocess 
 import os
 from arduino_nun import *
-import serial
+# import serial
 
-s = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
+# s = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
 
 app = Flask(__name__)      
 static = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
@@ -19,6 +19,7 @@ def test1():
 def show_user_profile(username):
     # show the user profile for that user
     return 'User %s' % username
+
 
 @app.route('/hello/<name>')
 def hello(name=None):
@@ -34,10 +35,16 @@ def add_numbers():
 @app.route('/map')
 def map():
     
-    result= jsonify({
-            "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'},
-            "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'}
-            })
+    result= {
+              "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'},
+              "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'},
+              "Anza Vista": {"fillOpacity": 0.9,"fillColor": 'blue'},
+              "Mission Dolores": {"fillOpacity": 0.5, "fillColor": 'black'},
+              "Dogpatch": {"fillOpacity": 0.5,"fillColor": 'blue'}
+            }
+            # "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'}, 
+            # "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'}
+            # }
     return render_template('merge_style_hoods.html', data = result)
 
 
@@ -45,10 +52,10 @@ def map():
 def sound():
     song =  '/'.join([static,'Jennifer.mp3'])
     # TODO: initialize the mixer at startup as a class object
-    # pygame.mixer.init()
-    # pygame.mixer.music.load(song)
-    # pygame.mixer.music.play()
-    # return 'Playing %s' % song
+    pygame.mixer.init()
+    pygame.mixer.music.load(song)
+    pygame.mixer.music.play()
+    return 'Playing %s' % song
     
 
 @app.route('/rainbow/') 
