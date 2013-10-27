@@ -6,14 +6,15 @@
     <title>Simple Polygon</title>
     <style>
       html, body, #map-canvas {
-        height: 100%;
+        height: 110%;
         margin: 0px;
         padding: 0px
       }
 
     </style>
     <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <!-- // <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> -->
+    <!-- // <script type="text/javascript" src="sf_neighbourhoods.js"></script> -->
     <script type=text/javascript src="{{url_for('static', filename='sf_neighbourhoods.js') }}"></script>
     
     <script type"text/javascript">
@@ -26,7 +27,7 @@ function initialize() {
   var featureOpts = [
     {
       stylers: [
-        { hue: '#890000' },
+        { hue: '#F0F8FF' },
         { visibility: 'simplified' },
         { gamma: 0.5 },
         { weight: 0.5 }
@@ -41,14 +42,14 @@ function initialize() {
     {
       featureType: 'water',
       stylers: [
-        { color: '#79b1ef' }
+        { color: '#E0EEEE' }
       ]
     },{
       featureType: "road",
       elementType: "geometry",
       stylers: [
         { lightness: 100 },
-        { visibility: "on" }
+        { visibility: "off" }
       ]
     },
     {
@@ -58,13 +59,6 @@ function initialize() {
       { visibility: "on" }
     ]
     },{
-    featureType: "road.highway",
-    elementType: "geometry.fill",
-    stylers: [
-      { "color": "#808080" },
-      { "visibility": "off" }
-    ]
-  },{
     featureType: "transit",
     stylers: [
       { "visibility": "off" }
@@ -75,7 +69,8 @@ function initialize() {
 
   var mapOptions = {
     zoom: 13,
-    center: new google.maps.LatLng(37.747, -122.433523),
+    center: new google.maps.LatLng(37.757, -122.433523),
+    disableDefaultUI:true,    
     mapTypeControlOptions: {
       mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
     },
@@ -94,6 +89,14 @@ function initialize() {
 
 
 var overrides = {{ data|tojson }}
+
+// var overrides= {
+//               "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'},
+//               "Apparel City": {"fillOpacity": 0.1,"fillColor": '#00FF00'},
+//               "Anza Vista": {"fillOpacity": 0.9,"fillColor": 'blue'},
+//               "Mission Dolores": {"fillOpacity": 0.1, "fillColor": 'black'},
+//               "Dogpatch": {"fillOpacity": 0.1,"fillColor": 'blue'}
+//             };
 
 for ( var key in hoods) {
   var hood = hoods[key]

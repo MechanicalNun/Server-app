@@ -11,9 +11,9 @@ from arduino_nun import *
 app = Flask(__name__)      
 static = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
 
-@app.route('/')
-def test1():
-  return render_template('merge_style_hoods.html')
+# @app.route('/')
+# def test1():
+#   return render_template('merge_style_hoods.html')
  
 @app.route('/name/<username>')
 def show_user_profile(username):
@@ -36,11 +36,18 @@ def add_numbers():
 def map():
     
     result= {
-              "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'},
-              "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'},
-              "Anza Vista": {"fillOpacity": 0.9,"fillColor": 'blue'},
-              "Mission Dolores": {"fillOpacity": 0.5, "fillColor": 'black'},
-              "Dogpatch": {"fillOpacity": 0.5,"fillColor": 'blue'}
+              "Parnassus Heights": {
+                "strokeColor": 'black',
+                "strokeOpacity": 0.9,
+                "strokeWeight": 0.9,
+                "fillColor": 'red',
+                "fillOpacity": 0.1
+                },
+              "Apparel City": {"fillOpacity": 0.9,"fillColor": '#009ACD'},
+              "Anza Vista": {"fillOpacity": 0.9,"fillColor": '#009ACD'},
+              "Mission Dolores": {"fillOpacity": 0.4, "fillColor": 'blue'},
+              "Dogpatch": {"fillOpacity": 0.9,"fillColor": '#009ACD', "strokeColor": "black" }, 
+              "Potrero Hill": {"fillOpacity": 0.9,"fillColor": '#009ACD', "strokeColor": "black" }
             }
             # "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'}, 
             # "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'}
