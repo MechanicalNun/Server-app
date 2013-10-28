@@ -6,3 +6,4 @@ flaskapp/MechNun/templates/shlomo.py
 flaskapp/MechNun/mongodb.tg
 
 flaskapp/MechNun/mongodb.tgz
+*.pyc
