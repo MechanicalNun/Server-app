@@ -34,7 +34,6 @@ def add_numbers():
 
 @app.route('/map')
 def map():
-    
     result= {
               "Parnassus Heights": {
                 "strokeColor": 'black',
