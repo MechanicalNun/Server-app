@@ -7,3 +7,5 @@ flaskapp/MechNun/mongodb.tg
 
 flaskapp/MechNun/mongodb.tgz
 *.pyc
+
+flaskapp/MechNun/db/*
