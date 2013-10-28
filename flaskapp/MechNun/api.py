@@ -13,7 +13,7 @@ app = Flask(__name__)
 app.config.update(
     MONGODB_HOST = 'localhost',
     MONGODB_PORT = '27017',
-    MONGODB_DB = 'mongorest_example_app',
+    MONGODB_DB = 'mechanical_nun_db',
 )
 
 db = MongoEngine(app)
