@@ -12,7 +12,7 @@ for (var neighborhood in hoodPolygons) {
         paths: paths,
         "strokeColor": '#FF0000',
         "strokeOpacity": 0,
-        "strokeWeight": 1,
+        "strokeWeight": 0.05,
         "fillColor": '#00FF00',
         "fillOpacity": 0
     }

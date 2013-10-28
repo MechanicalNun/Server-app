@@ -25,47 +25,39 @@ var MY_MAPTYPE_ID = 'custom_style';
 function initialize() {
 
   var featureOpts = [
-    {
-      stylers: [
-        { hue: '#F0F8FF' },
-        { visibility: 'simplified' },
-        { gamma: 0.5 },
-        { weight: 0.5 }
-      ]
-    },
-    {
-      elementType: 'labels',
-      stylers: [
-        { visibility: 'off' }
-      ]
-    },
-    {
-      featureType: 'water',
-      stylers: [
-        { color: '#E0EEEE' }
-      ]
-    },{
-      featureType: "road",
-      elementType: "geometry",
-      stylers: [
-        { lightness: 100 },
-        { visibility: "off" }
-      ]
-    },
-    {
-    featureType: "administrative",
-    elementType: "labels",
-    stylers: [
-      { visibility: "on" }
+  {
+    "stylers": [
+      { "hue": "#005eff" },
+      { "saturation": -87 },
+      { "lightness": 26 },
+      { "gamma": 0.84 }
     ]
-    },{
-    featureType: "transit",
-    stylers: [
+  },{
+    "featureType": "transit",
+    "stylers": [
       { "visibility": "off" }
     ]
+  },{
+    "featureType": "road.highway",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "poi",
+    "elementType": "labels",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "water",
+    "stylers": [
+      { "lightness": 64 },
+      { "saturation": -95 }
+    ]
+  },{
   }
-    
-  ];
+];
 
   var mapOptions = {
     zoom: 13,
@@ -103,8 +95,8 @@ for ( var key in hoods) {
     , hoodOverrides = overrides[key] || hoods[key]
     , polygon = {
       paths: hood.paths,
-      strokeColor: hood.strokeColor,
-      strokeWeight: hood.strokeWeight,
+      strokeColor: hoodOverrides.strokeColor,
+      strokeWeight: hoodOverrides.strokeWeight,
       fillColor: hoodOverrides.fillColor,
       fillOpacity: hoodOverrides.fillOpacity,
     }
