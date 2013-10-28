@@ -9,3 +9,12 @@ flaskapp/MechNun/mongodb.tgz
 *.pyc
 
 flaskapp/MechNun/db/*
+
+flaskapp/MechNun/mongodb*
+*.3
+
+src/flask-mongoengine/
+
+src/mongoengine/
+
+src/pip-delete-this-directory.txt
