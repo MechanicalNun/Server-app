@@ -28,6 +28,9 @@ class Location(db.EmbeddedDocument):
     def __unicode__(self):
         return self.name
 
+class LocationResource(Resource):
+	document = Location
+
 class Confession(db.Document):
     created_at = db.DateTimeField(default=datetime.datetime.now, required=True)
     primary_sin = db.StringField(required=True)
@@ -44,6 +47,9 @@ class Confession(db.Document):
 
 class ConfessionResource(Resource):
     document = Confession
+    related_resources = {
+        'location': LocationResource,
+    }
 
 @api.register(name='list', url='/confessions/')
 class ConfessionsView(ResourceView):
