@@ -25,8 +25,6 @@ class Location(db.EmbeddedDocument):
     longitude = db.FloatField(required=True)
     latitude = db.FloatField(required=True)
 
-    def __unicode__(self):
-        return self.name
 
 class LocationResource(Resource):
 	document = Location
@@ -38,11 +36,6 @@ class Confession(db.Document):
     gender = db.StringField(max_length=255, required=False)
     location = db.EmbeddedDocumentField(Location, required=True)
 
-    def get_absolute_url(self):
-        return url_for('confession', kwargs={"id": self.id})
-
-    def __unicode__(self):
-        return self.created_at.strftime('%H:%M %Y-%m-%d')
 
 
 class ConfessionResource(Resource):
