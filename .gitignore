@@ -18,3 +18,5 @@ src/flask-mongoengine/
 src/mongoengine/
 
 src/pip-delete-this-directory.txt
+
+simple_style.html
