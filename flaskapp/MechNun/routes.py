@@ -48,6 +48,22 @@ def map():
     return render_template('merge_style_hoods.html', data = result)
 
 
+@app.route('/greed')
+def greed():
+    result= {
+              "Parnassus Heights": {"fillOpacity": 0.1, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+              "Apparel City":      {"fillOpacity": 0.1, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+              "Anza Vista":        {"fillOpacity": 0.5, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+              "Mission Dolores":   {"fillOpacity": 0.4, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+              "Dogpatch":          {"fillOpacity": 0.9, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+              "Potrero Hill":      {"fillOpacity": 0.8, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,}
+            }
+            # "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'}, 
+            # "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'}
+            # }
+    return render_template('merge_style_hoods.html', data = result, sin = 'Greed')    
+
+
 @app.route('/sound')  
 def sound():
     song =  '/'.join([static,'Jennifer.mp3'])
@@ -73,6 +89,10 @@ def color(c):
 @app.route('/index')
 def index():
     return render_template('index.html')    
+
+@app.route('/video')
+def video():
+    return render_template('video.html')        
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)
