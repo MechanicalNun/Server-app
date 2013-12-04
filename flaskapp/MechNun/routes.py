@@ -4,6 +4,8 @@ import time
 import subprocess 
 import os
 from arduino_nun import *
+from survey2json import *
+import pandas
 # import serial
 
 # s = serial.Serial('/dev/ttyUSB0', 115200, timeout=0)
@@ -42,25 +44,23 @@ def map():
               "Dogpatch":          {"fillOpacity": 0.9, "fillColor": '#4cb8dc', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
               "Potrero Hill":      {"fillOpacity": 0.8, "fillColor": '#4cb8dc', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,}
             }
-            # "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'}, 
-            # "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'}
-            # }
+
     return render_template('merge_style_hoods.html', data = result)
 
 
 @app.route('/greed')
 def greed():
-    result= {
-              "Parnassus Heights": {"fillOpacity": 0.1, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
-              "Apparel City":      {"fillOpacity": 0.1, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
-              "Anza Vista":        {"fillOpacity": 0.5, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
-              "Mission Dolores":   {"fillOpacity": 0.4, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
-              "Dogpatch":          {"fillOpacity": 0.9, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
-              "Potrero Hill":      {"fillOpacity": 0.8, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,}
-            }
-            # "Parnassus Heights": {"fillOpacity": 0.9,"fillColor": '#00FF00'}, 
-            # "Apparel City": {"fillOpacity": 0.9,"fillColor": '#00FF00'}
-            # }
+    # result = get_greed
+    # result= {
+    #           "Parnassus Heights": {"fillOpacity": 0.1, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+    #           "Apparel City":      {"fillOpacity": 0.1, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+    #           "Anza Vista":        {"fillOpacity": 0.5, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+    #           "Mission Dolores":   {"fillOpacity": 0.4, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+    #           "Dogpatch":          {"fillOpacity": 0.9, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,},
+    #           "Potrero Hill":      {"fillOpacity": 0.8, "fillColor": '#4CDC70', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 2,}
+    #         }
+    result = get_greed()        
+            
     return render_template('merge_style_hoods.html', data = result, sin = 'Greed')    
 
 
