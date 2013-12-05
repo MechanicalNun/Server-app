@@ -3,7 +3,7 @@ import numpy as np
 from collections import defaultdict, Counter
 
 def add_records_to_json():
-    data = pd.read_csv('sins.csv', sep=',')
+    data = pd.read_csv('Sins_current.csv', sep=',')
     df = pd.DataFrame(data)
 
     sin2subsin = {
@@ -27,7 +27,7 @@ def add_records_to_json():
 
     poll = []
     for cnt in range(len(df)):
-        print cnt
+        
         if cnt >1:
             sins = [l for l in  ["Q1_%d"%l for l in range(1,8)] if not isNaN(df.ix[cnt][l])]
             
@@ -44,11 +44,21 @@ def add_records_to_json():
                         "commit_again": None,
                         "sin":Q2sin[sin],
                         "sub_sin":subsin,
+                        "sexual_orientation": df.ix[cnt]['Q6'],
+                        "religion": df.ix[cnt]['Q20'],          
                         "lat": None,
                         "lon": None, 
                         'neighborhood': df.ix[cnt]['Q21'],
-                        'timestamp' : df.ix[cnt]['V8']
+                        'timestamp' : df.ix[cnt]['V8'],
+                        'finished': df.ix[cnt]['V10'],
+                        'start_time': df.ix[cnt]['V8'],
+                        'end_time': df.ix[cnt]['V9'],
                         }
+                    if df.ix[cnt]['Q6'] =='other':
+                        record["sexual_orientation"] = df.ix[cnt]['Q6_TEXT']    
+                    
+                    if df.ix[cnt]['Q20']:
+                        record["religion"] = df.ix[cnt]['Q20_TEXT']
 
                     poll.append(record)    
     return poll        
@@ -69,9 +79,11 @@ def summarise_poll():
     sins_uniq = Counter([i['sin'] for i in poll])
     hoods_uniq = Counter([i['neighborhood'] for i in poll])
     # sex_uniq = Counter([i['sex'] for i in poll])
-    sex_uniq =['Male', "Female"]
+    sex_uniq =['Male', "Female", "Other"]
     age_uniq = Counter([i['age'] for i in poll])
-
+    orientation_uniq = Counter([i['sexual_orientation'] for i in poll])
+    religion_uniq = Counter([i['religion'] for i in poll])
+    finished_uniq = [1,0]
         # create a default dict for sins and attach to each neighborhood: 
     for hood in hoods_uniq:
         sin_hoods[hood] = dict((sin,0) for sin in sins_uniq.keys())
@@ -83,14 +95,17 @@ def summarise_poll():
         sin_age[age] = dict((sin,0) for sin in sins_uniq.keys())        
 
         # Populate the nested dictionary:
-    for record in poll:
-        Sin = record['sin']
-        Hood = record['neighborhood']
-        Sex = record['sex']
-        Age = record['age']
-        sin_hoods[Hood][Sin]+=1 
-        sin_sex[Sex][Sin]+=1 
-        sin_age[Age][Sin]+=1 
+    for cnt, record in enumerate(poll):
+        try:
+            Sin = record['sin']
+            Hood = record['neighborhood']
+            Sex = record['sex']
+            Age = record['age']
+            sin_hoods[Hood][Sin]+=1 
+            sin_sex[Sex][Sin]+=1 
+            sin_age[Age][Sin]+=1 
+        except KeyError:
+            print cnt    
 
     # make it a table using a DataFrame: 
     sins_hood_table = pd.DataFrame(sin_hoods)
@@ -104,7 +119,7 @@ def get_greed():
     greed = sins_hood.T['greed']
     new_vals = sins_hood.T['greed'].values/float(sins_hood.T['greed'].max())
     temp = dict((greed.keys()[l], new_vals[l]) for l in range(len(greed)))
-    template = {"fillOpacity": 0.1, "fillColor": '#4cb8dc', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 1,}
+    template = {"fillOpacity": 0.1, "fillColor": '#4cb8dc', "strokeColor": '#009ACD', "strokeOpacity": 1, "strokeWeight": 0,}
     live = {}
 
     for k,v in temp.iteritems():
